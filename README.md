@@ -1,5 +1,5 @@
-pip install -r requirements.txt<br/><br/>
-export username="username"
-export password="password"
-python3 fuf.py
-Follow the instructions
+pip install -r requirements.txt<br/>
+export username="username"<br/>
+export password="password"<br/>
+python3 fuf.py<br/>
+Follow the instructions<br/>
