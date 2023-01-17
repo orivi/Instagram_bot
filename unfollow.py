@@ -1,5 +1,4 @@
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
 import random
 import time
@@ -14,22 +13,23 @@ pwd = input("Enter your password: ")
 def main():
     options = webdriver.ChromeOptions()
     options.add_argument("--lang=en")
-    browser = webdriver.Chrome(executable_path="bots/Instagram_bot/chromedriver", options=options)
+    browser = webdriver.Chrome(executable_path="./chromedriver.exe", options=options)
+    # browser = webdriver.Chrome(executable_path="bots/Instagram_bot/chromedriver", options=options)
     browser.get("https://www.instagram.com")
     time.sleep(5)
 
-    username_input = browser.find_element_by_css_selector("input[name='username']")
-    password_input = browser.find_element_by_css_selector("input[name='password']")
+    username_input = browser.find_element(By.CSS_SELECTOR, value="input[name='username']")
+    password_input = browser.find_element(By.CSS_SELECTOR, value="input[name='password']")
 
     username_input.send_keys(user)
     password_input.send_keys(pwd)
     sleep_for_period_of_time()
 
-    login_button = browser.find_element_by_xpath("//button[@type='submit']")
+    login_button = browser.find_element(By.XPATH, value="//button[@type='submit']")
     login_button.click()
     sleep_for_period_of_time()
 
-    # not_now = browser.find_element_by_xpath("//div[@class='cmbtv']/button")
+    # not_now = browser.find_element(By.XPATH, value="//div[@class='cmbtv']/button")
     # not_now.click()
     # sleep_for_period_of_time()
 
@@ -37,7 +37,7 @@ def main():
     browser.get(f"https://www.instagram.com/{ig_user}")
     sleep_for_period_of_time()
 
-    followers_link = browser.find_element_by_xpath("//ul/li[3]/a")
+    followers_link = browser.find_element(By.XPATH, value="//ul/li[3]/a")
     followers_link.click()
     sleep_for_period_of_time()
 
@@ -51,7 +51,7 @@ def main():
                 if person.text == "Following":
                     person.click()
                     time.sleep(5)
-                    unfollow_btn = browser.find_element_by_xpath('//button[text()= "Unfollow"]')
+                    unfollow_btn = browser.find_element(By.XPATH, value='//button[text()= "Unfollow"]')
                     unfollow_btn.click()
                     print("Unfollowed!")
                     i +=1
