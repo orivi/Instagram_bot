@@ -5,17 +5,20 @@ import os
 import random
 import time
 
+
 def sleep_for_period_of_time():
-    limit = random.randint(5,7)
+    limit = random.randint(5, 7)
     time.sleep(limit)
 
-user = os.getenv("username")
-pwd = os.getenv("password")
+
+user = input("Enter your username: ")
+pwd = input("Enter your password: ")
+
 
 def main():
     options = webdriver.ChromeOptions()
     options.add_argument("--lang=en")
-    browser = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=options)
+    browser = webdriver.Chrome(executable_path="bots/Instagram_bot/chromedriver", options=options)
     browser.get("https://www.instagram.com")
     time.sleep(5)
 
@@ -44,15 +47,17 @@ def main():
 
     num_follow = input("How many person you want to follow: ")
 
-    while(True):
+    while True:
         try:
             i = 0
-            list_of_followers = browser.find_elements(By.XPATH, '//button/div/div[contains(text(), "Follow")]')
+            list_of_followers = browser.find_elements(
+                By.XPATH, '//button/div/div[contains(text(), "Follow")]'
+            )
             for person in list_of_followers:
                 if person.text == "Follow":
                     person.click()
                     print("Followed!")
-                    i +=1
+                    i += 1
                     print(i)
                     sleep_for_period_of_time()
                 else:
@@ -60,7 +65,9 @@ def main():
                 if i >= int(num_follow):
                     break
 
-            browser.execute_script("arguments[0].scrollIntoView(true);", list_of_followers[i])
+            browser.execute_script(
+                "arguments[0].scrollIntoView(true);", list_of_followers[i]
+            )
 
             answer = input("The programm finished! Click on 'e' to exit.. ")
             if answer.lower().startswith("e"):
@@ -70,6 +77,6 @@ def main():
         except Exception as e:
             print(e)
 
+
 if __name__ == "__main__":
     main()
-

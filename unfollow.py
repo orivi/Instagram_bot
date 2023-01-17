@@ -5,7 +5,7 @@ import random
 import time
 
 def sleep_for_period_of_time():
-    limit = random.randint(7,10)
+    limit = random.randint(5,7)
     time.sleep(limit)
 
 user = input("Enter your username: ")
@@ -14,7 +14,7 @@ pwd = input("Enter your password: ")
 def main():
     options = webdriver.ChromeOptions()
     options.add_argument("--lang=en")
-    browser = webdriver.Chrome(executable_path=ChromeDriverManager().install(), options=options)
+    browser = webdriver.Chrome(executable_path="bots/Instagram_bot/chromedriver", options=options)
     browser.get("https://www.instagram.com")
     time.sleep(5)
 
